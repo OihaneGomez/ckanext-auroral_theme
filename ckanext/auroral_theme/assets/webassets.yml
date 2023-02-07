@@ -1,0 +1,14 @@
+# auroral_theme-js:
+#   filter: rjsmin
+#   output: ckanext-auroral_theme/%(version)s-auroral_theme.js
+#   contents:
+#     - js/auroral_theme.js
+#   extra:
+#     preload:
+#       - base/main
+
+# auroral_theme-css:
+#   filter: cssrewrite
+#   output: ckanext-auroral_theme/%(version)s-auroral_theme.css
+#   contents:
+#     - css/auroral_theme.css

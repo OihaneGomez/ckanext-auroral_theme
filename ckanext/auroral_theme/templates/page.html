@@ -1,0 +1,34 @@
+{% ckan_extends %}
+
+{%- block page -%}
+
+  {% block skip %}
+    {{ super() }}
+  {% endblock %}
+
+  {#
+  Override the header on a page by page basis by extending this block. If
+  making sitewide header changes it is preferable to override the header.html
+  file.
+  #}
+
+<div class="head-content">
+  {%- block header %}
+    {{ super() }}
+  {% endblock -%}
+
+  {# The content block allows you to replace the content of the page if needed #}
+  {%- block content %}
+    {{ super() }}
+  {% endblock -%}
+  <div class="push"></div>
+</div>
+  {#
+  Override the footer on a page by page basis by extending this block. If
+  making sitewide header changes it is preferable to override the footer.html-u
+  file.
+  #}
+  {%- block footer %}
+    {{ super() }}
+  {% endblock -%}
+{%- endblock -%}
