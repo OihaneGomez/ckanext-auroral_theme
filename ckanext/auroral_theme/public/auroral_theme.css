@@ -3,7 +3,7 @@
     padding-bottom: 1%;
 }
 
-.masthead .nav > li > a, .masthead .nav > li > a:focus, .masthead .nav > li > a:hover, .masthead .nav > .active > a, .masthead .nav > .active > a:hover, .masthead .nav > .active > a:focus {
+.masthead .nav > li > a, .masthead .nav > li > a:focus, .masthead .nav > li > .masthead .nav > .active > a, .masthead .nav > .active > a:hover, .masthead .nav > .active > a:focus {
     color: #1e5253;
     text-shadow: none;
     position: relative;
@@ -12,6 +12,14 @@
     font-size: 20px;
   }
 
+  .masthead .navigation .nav-pills li a:hover,
+  .masthead .navigation .nav-pills li a:focus,
+  .masthead .navigation .nav-pills li.active a {
+    background-color: #1e5253;
+    color: #ffffff;
+    font-style: bold;
+  }
+  
 .account-masthead {
     background: none;
 }
@@ -111,12 +119,17 @@ masthead .logo img {
     max-height: 80px;
   }
 
-button{
+button2{
     font-family: raleway, sans-serif;
     font-style: normal;
     font-weight: 400;
     size: 14pt;
 }
+
+.btn-primary2:hover {
+    color: #ffffff;
+    background-color: #1e5253;
+  }
 
 @media (min-width: 1768px) {
     [role=main],
@@ -142,7 +155,7 @@ button{
 }
 
 
-.btn-primary {
+.btn-primary2 {
     color: #348c8d;
     background-color: #348c8d;
     border-color: #348c8d;
