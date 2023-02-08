@@ -11,3 +11,21 @@
     {% endif %}
 {% endblock %}
 
+{% block header_site_navigation %}
+  <nav class="section navigation">
+    <ul class="nav nav-pills">
+      {% block header_site_navigation_tabs %}
+        {% block auroral_navigation_tabs %}
+          {{ h.build_nav_main(
+            ('search', _('Datasets')),
+            ('organizations_index', _('Organizations')),
+            ('group_index', _('Domains'))
+          ) }}
+          <li>
+            <a href="https://www.auroral.eu/#/p-about" target="_blank">About AURORAL</a>
+          </li>
+        {% endblock %}
+      {% endblock %}
+    </ul>
+  </nav>
+{% endblock %}
