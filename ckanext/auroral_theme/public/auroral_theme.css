@@ -119,6 +119,12 @@ masthead .logo img {
     max-height: 80px;
   }
 
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-bottom: 10%;
+}
+
 button2{
     font-family: raleway, sans-serif;
     font-style: normal;
@@ -134,8 +140,8 @@ button2{
 @media (min-width: 1768px) {
     [role=main],
     .main {
-      min-height: 1500px;
-      background: #ffffff;
+    height:100%;
+      background: transparent;
     }
   }
 
