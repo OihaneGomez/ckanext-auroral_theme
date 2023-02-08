@@ -1,39 +1,10 @@
-[![Tests](https://github.com/University of Deusto/ckanext-auroral_theme/workflows/Tests/badge.svg?branch=main)](https://github.com/University of Deusto/ckanext-auroral_theme/actions)
-
 # ckanext-auroral_theme
 
-**TODO:** Put a description of your extension here:  What does it do? What features does it have? Consider including some screenshots or embedding a video!
+This is a repository containing the theme for the AURORAL Data Catalogue
 
-
-## Requirements
-
-**TODO:** For example, you might want to mention here which versions of CKAN this
-extension works with.
-
-If your extension works across different versions you can add the following table:
-
-Compatibility with core CKAN versions:
-
-| CKAN version    | Compatible?   |
-| --------------- | ------------- |
-| 2.6 and earlier | not tested    |
-| 2.7             | not tested    |
-| 2.8             | not tested    |
-| 2.9             | not tested    |
-
-Suggested values:
-
-* "yes"
-* "not tested" - I can't think of a reason why it wouldn't work
-* "not yet" - there is an intention to get it working
-* "no"
 
 
 ## Installation
-
-**TODO:** Add any additional install steps to the list below.
-   For example installing any non-Python dependencies or adding any required
-   config settings.
 
 To install ckanext-auroral_theme:
 
@@ -43,7 +14,7 @@ To install ckanext-auroral_theme:
 
 2. Clone the source and install it on the virtualenv
 
-    git clone https://github.com/University of Deusto/ckanext-auroral_theme.git
+    git clone https://github.com/OihaneGomez/ckanext-auroral_theme.git
     cd ckanext-auroral_theme
     pip install -e .
 	pip install -r requirements.txt
@@ -118,6 +89,3 @@ If ckanext-auroral_theme should be available on PyPI you can follow these steps 
        git tag 0.0.1
        git push --tags
 
-## License
-
-[AGPL](https://www.gnu.org/licenses/agpl-3.0.en.html)
