@@ -2,7 +2,7 @@
 
 {% block header_logo %}
     {% if g.site_logo %}
-        <a class="logo" href="https://www.auroral.eu/#/"><img src="https://www.auroral.eu/img/logos/AURORAL-Horizontal_o.png" alt="{{ g.site_title }}" title="{{ g.site_title }}" /></a>
+        <a class="logo" href="/"><img src="https://www.auroral.eu/img/logos/AURORAL-Horizontal_o.png" alt="{{ g.site_title }}" title="{{ g.site_title }}" /></a>
     {% else %}
         <h1>
         <a href="https://www.auroral.eu/#/">{{ g.site_title }}</a>
@@ -24,8 +24,33 @@
           <li>
             <a href="https://www.auroral.eu/#/p-about" target="_blank">About AURORAL</a>
           </li>
+            <!-- Login -->
+            <!--
+            {% block auroral_custom_login %}
+            {% if c.userobj %}
+              <li>
+                <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
+                  <i class="fa fa-user"></i>
+                  <span class="username">{{ c.userobj.display_name }}</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
+                  <i class="fa fa-sign-out" aria-hidden="true"></i>
+                  <span class="text">{{ _('Log out') }}</span>
+                </a>
+              </li>
+            {% else %}
+               <li>{% link_for _('Log in'), controller='user', action='login' %}</li>
+               
+               <li>{% link_for _('Register'), controller='user', action='register' %}</li>
+               
+            {% endif %}
+          {% endblock %}
+          -->
         {% endblock %}
       {% endblock %}
     </ul>
   </nav>
+
 {% endblock %}
