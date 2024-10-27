@@ -1,0 +1,31 @@
+{% extends 'page.html' %}
+
+{% block subtitle %}{{ _('AURORAL Privacy Policy for the AURORAL Data Catalogue') }}{% endblock %}
+
+{% block primary_content %}
+<article class="module">
+  <div class="module-content">
+    {% block primary_content_inner %}
+    <h1 class="page-heading">
+      {% block page_heading %}{{ _('AURORAL Data Catalogue Wiki') }}{% endblock %}
+      <div class="module-content">
+        {{ "
+        # AURORAL Data Catalogue
+
+        ## What is the AURORAL Data Catalogue?
+
+        The AURORAL Data Catalogue is an open data portal...
+
+        ![Description](image-url.png)
+        " | markdown }}
+    </div>
+
+
+    {% endblock %}
+  </div>
+</article>
+{% endblock %}
+
+
+
+

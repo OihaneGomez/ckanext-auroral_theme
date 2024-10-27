@@ -1,0 +1,246 @@
+{% extends 'page.html' %}
+
+{% block subtitle %}{{ _('AURORAL Privacy Policy for the AURORAL Data Catalogue') }}{% endblock %}
+
+{% block primary_content %}
+<article class="module">
+  <div class="module-content">
+    {% block primary_content_inner %}
+    <h1 class="page-heading">
+      {% block page_heading %}{{ _('AURORAL Data Catalogue Wiki') }}{% endblock %}
+    </h1>
+    
+    <p style="font-size: 1.2em; font-weight: bold;">
+      This section will guide you through the steps to register datasets using the AURORAL middleware and a node.
+  </p>
+
+    <hr>
+
+      <h2 id="what-is-the-auroral-data-catalogue-">What is the AURORAL Data Catalogue?</h2>
+      <p>The AURORAL Data Catalogue (<a href="http://auroraldatacatalogue.eu">http://auroraldatacatalogue.eu</a>) is an open data portal that provides a catalog of data resources from the entities participating in the AURORAL project. It serves as a key tool for showcasing and making accessible the datasets created within the project.</p>
+      <p>Unlike traditional data storage systems, the AURORAL Data Catalogue does not store data directly. Instead, it offers a centralized directory where resources are listed and linked to the locations (URIs) where the actual datasets are hosted. This approach ensures that data remains decentralized and under the control of the entities that produce it, promoting privacy and security.</p>
+      <p>The service is fully automated and works through the AURORAL middleware, which discovers and registers datasets from the AURORAL nodes in real time. By leveraging this middleware, the Data Catalogue provides an up-to-date view of available datasets, automatically reflecting any changes in the underlying data nodes, such as when a dataset is added or removed.</p>
+      <p>This cataloging service supports a wide range of domains, including mobility, energy, health, and tourism, among others, allowing organizations to share and discover data resources easily. Through this platform, users can search for and filter datasets based on various criteria, making it a powerful tool for fostering collaboration and innovation across different sectors.</p>
+      <p><img src="https://i.postimg.cc/BZLQcc2w/landingpage.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      <hr>
+      <h2 id="prerequisites">Prerequisites</h2>
+      <p>Before using the AURORAL Data Catalogue service, ensure you meet the following requirements:</p>
+      <ul>
+      <li><p><strong>AURORAL Platform Account</strong>: You must have an account on the <a href="https://auroral.bavenir.eu/">AURORAL Platform</a>. This is necessary for accessing the AURORAL middleware and connecting through the node.</p>
+      </li>
+      <li><p><strong>AURORAL Node Deployment</strong>: You need to have a deployed AURORAL Node in your infrastructure. The node will serve as the interface to register and expose your datasets through the AURORAL middleware. You can install your node following the instructions in the <a href="https://auroral.docs.bavenir.eu/getting_started/install_node/">AURORAL Documentation</a></p>
+      </li>
+      <li><p><strong>Community Membership</strong>: Your node must be part of the Data Catalogue community within the AURORAL Neighbourhood Manager. This membership is required to facilitate the exchange of metadata between the service and the participating nodes.</p>
+      </li>
+      <li><p><strong>Web of Things (WoT) Description</strong>: Datasets must be described using the Web of Things (WoT) format. This ensures that the metadata is standardized and compatible with the AURORAL ecosystem.</p>
+      </li>
+      </ul>
+      <hr>
+      <h2 id="describing-your-dataset">Describing your dataset</h2>
+      <p>The datasets in the AURORAL platform are described according to the <strong>Web of Things (WoT) Dictionary</strong>, which allows for standardized metadata representation. You can easily register your dataset by using the following template and replacing the placeholder values with your actual dataset information:</p>
+      <pre><code class="lang-json">{
+        <span class="hljs-attr">"@context"</span>: [
+          <span class="hljs-string">"https://www.w3.org/2019/wot/td/v1"</span>,
+          {
+            <span class="hljs-attr">"adp"</span>: <span class="hljs-string">"https://auroral.iot.linkeddata.es/def/adapters#"</span>,
+            <span class="hljs-attr">"om"</span>: <span class="hljs-string">"http://www.ontology-of-units-of-measure.org/resource/om-2/"</span>,
+            <span class="hljs-attr">"geo"</span>: <span class="hljs-string">"http://www.w3.org/2003/01/geo/wgs84_pos#"</span>,
+            <span class="hljs-attr">"schema"</span>: <span class="hljs-string">"https://schema.org/"</span>
+          }
+        ],
+        <span class="hljs-attr">"security"</span>: [
+          <span class="hljs-string">"nosec_sc"</span>
+        ],
+        <span class="hljs-attr">"securityDefinitions"</span>: {
+          <span class="hljs-attr">"nosec_sc"</span>: {
+            <span class="hljs-attr">"scheme"</span>: <span class="hljs-string">"nosec"</span>
+          }
+        },
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"The title for your dataset"</span>,
+        <span class="hljs-attr">"@type"</span>: <span class="hljs-string">"adp:Dataset"</span>,
+        <span class="hljs-attr">"domain"</span>: <span class="hljs-string">"Your domain"</span>,
+        <span class="hljs-attr">"provider"</span>:<span class="hljs-string">"The name of your company/institution"</span>,
+        <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A description of your dataset"</span>,
+        <span class="hljs-attr">"url"</span>: <span class="hljs-string">"The url for accessing your data"</span>
+      }
+      </code></pre>
+      <p>Replace the following fields: </p>
+      <ul>
+      <li><code>"title"</code>: Provide the title of your dataset. </li>
+      <li><code>"domain"</code>: Indicate the domain. Available domains are mobility, energy, health, farming, tourism, and other. </li>
+      <li><code>"provider"</code>: Your company or institution's name. </li>
+      <li><code>"description"</code>: A detailed description of the dataset. </li>
+      <li><code>"url"</code>: The URL where the dataset can be accessed. </li>
+      </ul>
+      <p>Once this information is set, you are ready to use the AURORAL API to register your dataset.</p>
+      <h2 id="how-to-register-a-dataset-in-the-node">How to Register a Dataset in the Node</h2>
+      <ol>
+      <li><p><strong>Access the Node</strong>: Open a web browser and navigate to the node using its IP address and port. The format is <code>http://&lt;node-ip&gt;:&lt;port&gt;</code>. Example: <code>http://192.168.1.10:81</code> or <code>http://localhost:81</code>. </p>
+      </li>
+      <li><p><strong>Choose an Interface</strong>: You have two options for interacting with the node:</p>
+      <ul>
+        <li><strong>API</strong>: You can use the AURORAL Open API to register datasets.</li>
+        <li><strong>Node UI</strong>: You can also use the Node's web-based User Interface (UI) to do it.</li>
+      </ul>
+      </li>
+      </ol>
+      <h3>2.1. Using the AURORAL Node UI:</h3>
+      <p>Access the NODE UI by adding <code>/ui</code> at the end of your node URL (example <code>http://localhost:81/ui</code>) and then go to the "My Node" section in the left-side menu. This section will allow you to manage the items available in your node, including datasets.</p>
+      <p>There are two ways to register a new dataset through the UI:</p>
+      <ul>
+        <li>Click on the <strong>+ New item</strong> button located on the right side of the page, as shown in the image below. You will be presented with two options:
+          <ul>
+            <li><strong>Use Editor</strong>: This allows you to manually input the metadata for the dataset through an editor.</li>
+            <li><strong>Upload TD</strong>: This allows you to upload a Thing Description (TD) file, which follows the Web of Things (WoT) format.</li>
+          </ul>
+        </li>
+      </ul>
+      <p><img src="https://i.postimg.cc/yNSCmyby/IU-options.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      <p>In this case, given that the description of data template is provided, go to Upload TD and copy-paste the thing description of your data in the &lt; Code &gt; tab:</p>
+      <p><img src="https://i.postimg.cc/BbprSYj4/TDUI.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      <p>Then, click on + Create Item and your dataset description will be created.</p>
+      <p>After successfully registering the description of your datasets, it will appear in the list of datasets with a <strong>NEW</strong> label, as shown in the image below:</p>
+      <p><img src="https://i.postimg.cc/FK0HxvfR/registereditems.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      <p>By clicking on the item name, you will be able to remove or edit the dataset description:</p>
+      <p><img src="https://i.postimg.cc/h40W1jp6/removeedit.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      <h3>2.2. Using the API:</h3>
+      <p><strong>NOTE:</strong> When using the API to register a dataset, it is necessary to make a slight modification to the Thing Description (TD). Below, we include the modified TD description that should be used for registration.</p>
+      <pre><code class="lang-json">{
+        <span class="hljs-attr">"td"</span>: {
+          <span class="hljs-attr">"@context"</span>: [
+            <span class="hljs-string">"https://www.w3.org/2019/wot/td/v1"</span>,
+            {
+              <span class="hljs-attr">"adp"</span>: <span class="hljs-string">"https://auroral.iot.linkeddata.es/def/adapters#"</span>,
+              <span class="hljs-attr">"om"</span>: <span class="hljs-string">"http://www.ontology-of-units-of-measure.org/resource/om-2/"</span>,
+              <span class="hljs-attr">"geo"</span>: <span class="hljs-string">"http://www.w3.org/2003/01/geo/wgs84_pos#"</span>,
+              <span class="hljs-attr">"schema"</span>: <span class="hljs-string">"https://schema.org/"</span>
+            }
+          ],
+          <span class="hljs-attr">"security"</span>: [
+            <span class="hljs-string">"nosec_sc"</span>
+          ],
+          <span class="hljs-attr">"securityDefinitions"</span>: {
+            <span class="hljs-attr">"nosec_sc"</span>: {
+              <span class="hljs-attr">"scheme"</span>: <span class="hljs-string">"nosec"</span>
+            }
+          },
+          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"The title for your dataset"</span>,
+          <span class="hljs-attr">"@type"</span>: <span class="hljs-string">"adp:Dataset"</span>,
+          <span class="hljs-attr">"domain"</span>: <span class="hljs-string">"Your domain"</span>,
+          <span class="hljs-attr">"provider"</span>:<span class="hljs-string">"The name of your company/institution"</span>,
+          <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A description of your dataset"</span>,
+          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"The url for accessing your data"</span>
+        },
+        <span class="hljs-attr">"avatar"</span>: <span class="hljs-string">"nostrud sunt"</span>
+      }
+      </code></pre>
+      <p>Go to <code>/api/registration</code> and copy the WoT description of your data.</p>
+      <p><img src="https://i.postimg.cc/zXds4Qmk/registering1.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      <p>Then click execute, and you will receive the following response with a 201 code indicating that it was successfully registered:</p>
+      <p><img src="https://i.postimg.cc/9QR3GB4F/response1.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      <p>For detailed instructions on how to submit, update, or delete metadata in the Web of Things (WoT) format, please refer to the <a href="https://auroralh2020.github.io/auroral-node-agent/">AURORAL Open API documentation</a>.</p>
+      <h2 id="how-to-display-them-in-the-auroral-data-catalogue">How to display them in the AURORAL Data Catalogue</h2>
+      <p>Once you have registered your datasets, follow these steps to display them in the AURORAL Data Catalogue:</p>
+      <ol>
+      <li><p><strong>Access the AURORAL Platform</strong>:</p>
+      <ul>
+      <li>Log in to the <a href="https://auroral.bavenir.eu/">AURORAL Platform</a>.</li>
+      </ul>
+      </li>
+      <li><p><strong>Join the Data Catalogue Community</strong>:</p>
+      <p><strong>Note</strong>: This step only needs to be done the first time you use a node to register datasets. If you use a different node in the future, you'll need to repeat this process for that node.</p>
+      <ul>
+      <li>Navigate to the <strong>Communities</strong> section from the left-hand menu.</li>
+      <li><p>Locate the <strong>Data Catalogue Community</strong> and access it. This community enables your node to interact with the AURORAL Data Catalogue.</p>
+      <p><img src="https://i.postimg.cc/Ss75dT7C/communities.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      </li>
+      <li><p>To join the community, click on <strong>Update My Nodes</strong> inside the Data Catalogue Community. You can do it just by pressing the red arrow on the node you are registering the dataset until a green check mark appears.</p>
+      <p><img src="https://i.postimg.cc/c1h28zJN/enable.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      </li>
+      </ul>
+      <p>This way, you enable the node where you registered your datasets to share the metadata with the community. This step ensures that the node's datasets are synchronized with the AURORAL platform. To remove a node from the community, do the opposite.</p>
+      <p>Remember that you only need to update your node again if you use a different node in the future.</p>
+      </li>
+      <li><p><strong>Enable Dataset for Public Access</strong>:</p>
+      <p>To be able to share data with the community, you also need to enable the item (dataset) and change its visibility level. For that:</p>
+      <ul>
+      <li><p>Go to the <strong>Items</strong> section, where you will find the datasets registered through your node.</p>
+      <p><img src="https://i.postimg.cc/HkqhgD6b/enable-item.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      </li>
+      <li><p>Click on the dataset you wish to display.</p>
+      </li>
+      <li><p>Within the item view, click on <strong>Enable Device</strong> to make the dataset active.</p>
+      <p><img src="https://i.postimg.cc/L58yTHsF/enable2.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      </li>
+      <li><p>In the <strong>Visibility Level</strong> settings, choose <strong>Public with data under request</strong>. This option allows users to discover the dataset in the catalogue and request access to the data.</p>
+      <p><img src="https://i.postimg.cc/hGRpY8Gr/visibility.png" alt="enter image description here" style="max-width:100%; height:auto;"></p>
+      </li>
+      </ul>
+      </li>
+      </ol>
+      <p><strong>Now your dataset registration process is over!</strong></p>
+      <ol start="4">
+      <li><p><strong>Wait for Dataset to Appear</strong>:</p>
+      <ul>
+      <li>After enabling the dataset and setting the visibility, wait a few seconds. The dataset will automatically appear in the AURORAL Data Catalogue for other users to discover and request access.</li>
+      </ul>
+      </li>
+      </ol>
+      <p>Once these steps are completed, your dataset will be available to the public through the AURORAL Data Catalogue.</p>
+      <h2 id="common-issues-and-troubleshooting">Common Issues and Troubleshooting</h2>
+      <p><strong>What should I do if my dataset doesn’t appear in the catalogue?</strong></p>
+      <ul>
+      <li>Ensure that you have:
+        <ul>
+          <li>Enabled the dataset item by clicking <strong>Enable Device</strong>.</li>
+          <li>Set the visibility level to <strong>Public with data under request</strong>.</li>
+          <li>Waited a few seconds for the catalogue to refresh.</li>
+        </ul>
+      </li>
+      <li>If the issue persists, verify that your node is properly connected to the <strong>Data Catalogue Community</strong> and that there are no network issues.</li>
+      </ul>
+      <h2 id="faq">FAQ</h2>
+      <h3 id="1-how-can-i-edit-the-photo-and-description-of-my-organization-in-the-auroral-data-catalogue-">1. <strong>How can I edit the photo and description of my organization in the AURORAL Data Catalogue?</strong></h3>
+      <p>To edit the profile photo and description of your organization, you need to fill out a form with the desired information:</p>
+      <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdqbQialLEPqtUokHXuNoDL4DXFgb52Fd1Ag0xUnfQLUsZ1Mg/viewform?usp=sf_link">Link to the form</a></p>
+      <p>Include the new description text and the profile image you want to use, then submit it to the AURORAL support team. The data catalogue will be updated with your changes.</p>
+      <h3 id="2-do-i-need-to-update-my-node-every-time-i-register-a-new-dataset-">2. <strong>Do I need to update my node every time I register a new dataset?</strong></h3>
+      <p><strong>No</strong>, you only need to update your node the first time you use it to register datasets. If you decide to use a different node in the future, you will need to update that new node. However, for the same node, you don't need to repeat this process for subsequent dataset registrations.</p>
+      <h3 id="3-how-long-does-it-take-for-a-dataset-to-appear-in-the-auroral-data-catalogue-">3. <strong>How long does it take for a dataset to appear in the AURORAL Data Catalogue?</strong></h3>
+      <p>After enabling the dataset and setting its visibility to "Public with data under request," it should appear in the catalogue within a minute.</p>
+      <h3 id="4-can-i-register-multiple-datasets-through-the-same-node-">4. <strong>Can I register multiple datasets through the same node?</strong></h3>
+      <p><strong>Yes</strong>, you can register multiple datasets either through the <strong>Node UI</strong> or by uploading multiple <strong>Thing Descriptions (TD)</strong> via the API. Just make sure that each dataset has its unique metadata and is correctly formatted.</p>
+      <h3 id="5-can-i-delete-a-dataset-">5. <strong>Can I delete a dataset?</strong></h3>
+      <p><strong>Yes</strong>, if a dataset is deleted from the node where it was registered, it will automatically be removed from the AURORAL Data Catalogue as well. This ensures that the catalogue stays up to date with the data available in the nodes. However, please note that the removal process usually takes longer than the registration process to be reflected in the catalogue.</p>
+      <h3 id="6-can-i-make-a-dataset-private-after-making-it-public-">6. <strong>Can I make a dataset private after making it public?</strong></h3>
+      <p><strong>Yes</strong>, you can change the visibility setting from "Public" to "Private" at any time. Simply access the dataset in the <strong>Items</strong> section, and adjust the visibility level. Once set to private, your dataset will no longer appear in the public catalogue.</p>
+      <h3 id="7-how-do-i-edit-an-already-registered-dataset-">7. <strong>How do I edit an already registered dataset?</strong></h3>
+      <p>You can edit the metadata of a dataset through the <strong>Node UI</strong>. Access the dataset via the <strong>Items</strong> section, make the necessary changes, and submit the updated information. The changes will reflect in the AURORAL Data Catalogue shortly after.</p>
+      <h2 id="contact">Contact</h2>
+      <p><strong>If you encounter any issues or require further assistance, please do not hesitate to contact Oihane Gómez at <a href="mailto:oihane.gomezc@deusto.es">oihane.gomezc@deusto.es</a>.</strong></p>
+      
+    {% endblock %}
+
+
+
+  </div>
+</article>
+{% endblock %}
+
+
+{% block secondary_content %}
+<div style="padding: 15px;">
+  <h2>Table of Contents</h2>
+
+  <ol>
+    <li><a href="#what-is-the-auroral-data-catalogue">What is the AURORAL Data Catalogue?</a></li>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li><a href="#describing-your-dataset">Describing your dataset</a></li>
+    <li><a href="#how-to-register-a-dataset-in-the-node">How to Register a Dataset in the Node</a></li>
+    <li><a href="#how-to-display-it-in-the-auroral-data-catalogue">How to display it in the AURORAL Data Catalogue</a></li>
+    <li><a href="#common-issues-and-troubleshooting">Common Issues and Troubleshooting</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</div>
+{% endblock %}
